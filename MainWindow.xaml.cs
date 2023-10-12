@@ -10,7 +10,7 @@ namespace VirtualOffice
     {
 
         Manager manager = new Manager();
-        List<Person> persons = new();
+        List<Person> EmployeeDatabase = new();
 
         public MainWindow()
         {
@@ -20,7 +20,6 @@ namespace VirtualOffice
             {
                 comboDepartment.Items.Add(item);
             }
-
 
         }
 
@@ -51,13 +50,15 @@ namespace VirtualOffice
                 // använder konstruktorn för att ta in bio
                 Employee employee = new Employee(fname, lname, ageInt, bio, salaryDecimal);
 
-                // data-bindningen möjliggör denna placering i listview
+                // data-binding av properties med XAML-fönstret 
                 EmployeeListView.Items.Add(new
                 {
                     Förnamn = fname,
                     EfterNamn = lname,
                     Bakgrund = department,
                 });
+
+                EmployeeDatabase.Add(employee);
             }
 
             else if (ageIsConverted && salaryIsConverted && nameIsLongEnough && lnameIsLongEnough && bio.Length <= 0)
@@ -74,7 +75,45 @@ namespace VirtualOffice
                     Bakgrund = department,
                 });
 
+                EmployeeDatabase.Add(employee);
+            }
+        }
 
+        private void Button_Click_Remove(object sender, RoutedEventArgs e)
+        {
+            int index = EmployeeListView.SelectedIndex; // listview
+            Employee emp = (Employee)EmployeeDatabase[index]; // samma index i databasen 
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to remove?", "Remove employee", MessageBoxButton.YesNoCancel);
+            if (MessageBoxResult.Yes == result)
+            {
+                EmployeeListView.Items.RemoveAt(index);
+                EmployeeDatabase.RemoveAt(index);
+            }
+        }
+
+        private void EmployeeListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            // man kan bara ta bort employees när ett index är valt i listview
+            int index = EmployeeListView.SelectedIndex;
+            if (index >= 0)
+            {
+                btndelete.IsEnabled = true;
+            }
+        }
+
+        private void btnDetails_Click(object sender, RoutedEventArgs e)
+        {
+            Object Employee = EmployeeListView.SelectedItem;
+            for (int i = 0; i < EmployeeDatabase.Count; i++)
+            {
+                if (EmployeeDatabase[i] == EmployeeListView.SelectedItem)
+                {
+                    Employee emp = (Employee)EmployeeDatabase[i];
+                    EmployeeDetailsWindow detailsWindow = new(emp); // 1. Kör konstruktorn
+                    detailsWindow.Show(); // 2. visa fönstret 
+                    Close(); // 3. stäng det gamla fönstret 
+                    break;
+                }
             }
         }
     }
