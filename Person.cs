@@ -3,18 +3,18 @@
     /* =======================================MODEL================================================== */
     internal class Person
     {
-        private string Förnamn { get; set; }
-        private string EfterNamn { get; set; }
+        public string Förnamn { get; set; }
+        public string EfterNamn { get; set; }
 
-        private int Age { get; set; }
+        public int Age { get; set; }
         public virtual string Bakgrund { get; set; } // can be overridden. 
-        private decimal Salary { get; set; }
+        public decimal Salary { get; set; }
 
         public Person(string namn, string efternamn, int age, decimal salary)
         {
             Förnamn = namn;
             EfterNamn = efternamn;
-            Bakgrund = "Default bio";
+            Bakgrund = "(Not yet filled in)";
             Salary = salary;
             Age = age;
         }

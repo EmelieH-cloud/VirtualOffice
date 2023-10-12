@@ -54,5 +54,6 @@
         <Button Click="Button_Click" Content="Add" Grid.Column="4" Grid.Row="7" FontSize="17" Margin="5"/>
         <Button Name="btndelete" Grid.Column="5" Grid.Row="7" Margin="5" Content="Remove" FontSize="17" IsEnabled="False" Click="Button_Click_Remove"/>
         <Button Name="btnDetails" Grid.Column="6" Grid.Row="7" Content="Show details" Margin="5" Click="btnDetails_Click"/>
+        <Label Name="lblcount" Grid.Row="0" Grid.Column="4" Content="Registered employees: " Grid.ColumnSpan="3"/>
     </Grid>
 </Window>

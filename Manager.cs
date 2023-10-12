@@ -8,9 +8,12 @@
         {
             bool result;
             int converted;
-
             result = int.TryParse(age, out converted);
-            return result;
+            if (result == true)
+            {
+                return true;
+            }
+            return false;
         }
 
         public bool ValidateSalaryInput(string salary)
@@ -18,7 +21,12 @@
             bool result;
             decimal converted;
             result = decimal.TryParse(salary, out converted);
-            return result;
+            if (result == true)
+            {
+                return true;
+            }
+            return false;
+
         }
 
         public bool ValidateStringInput(string str)

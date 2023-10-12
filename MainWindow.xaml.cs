@@ -11,6 +11,7 @@ namespace VirtualOffice
 
         Manager manager = new Manager();
         List<Person> EmployeeDatabase = new();
+        int empCount = 0;
 
         public MainWindow()
         {
@@ -19,6 +20,8 @@ namespace VirtualOffice
             foreach (var item in Enum.GetValues(typeof(Department)))
             {
                 comboDepartment.Items.Add(item);
+
+
             }
 
         }
@@ -45,8 +48,8 @@ namespace VirtualOffice
             if (ageIsConverted && salaryIsConverted && nameIsLongEnough && lnameIsLongEnough && bio.Length > 0)
             {
                 // konverterar om input är ok. 
-                int ageInt = Convert.ToInt32(ageIsConverted);
-                decimal salaryDecimal = Convert.ToDecimal(salaryIsConverted);
+                int ageInt = Convert.ToInt32(age);
+                decimal salaryDecimal = Convert.ToDecimal(salary);
                 // använder konstruktorn för att ta in bio
                 Employee employee = new Employee(fname, lname, ageInt, bio, salaryDecimal);
 
@@ -59,12 +62,14 @@ namespace VirtualOffice
                 });
 
                 EmployeeDatabase.Add(employee);
+                empCount++;
+                lblcount.Content = empCount.ToString();
             }
 
             else if (ageIsConverted && salaryIsConverted && nameIsLongEnough && lnameIsLongEnough && bio.Length <= 0)
             {
-                int ageInt = Convert.ToInt32(ageIsConverted);
-                decimal salaryDecimal = Convert.ToDecimal(salaryIsConverted);
+                int ageInt = Convert.ToInt32(age);
+                decimal salaryDecimal = Convert.ToDecimal(salary);
                 Employee employee = new(fname, lname, ageInt, salaryDecimal);
                 string defaultad = employee.Bakgrund; // behållare för default-bion. 
 
@@ -76,6 +81,8 @@ namespace VirtualOffice
                 });
 
                 EmployeeDatabase.Add(employee);
+                empCount++;
+                lblcount.Content = empCount.ToString();
             }
         }
 
@@ -88,6 +95,8 @@ namespace VirtualOffice
             {
                 EmployeeListView.Items.RemoveAt(index);
                 EmployeeDatabase.RemoveAt(index);
+                empCount--;
+                lblcount.Content = empCount.ToString();
             }
         }
 
@@ -103,18 +112,26 @@ namespace VirtualOffice
 
         private void btnDetails_Click(object sender, RoutedEventArgs e)
         {
-            Object Employee = EmployeeListView.SelectedItem;
+            int index = EmployeeListView.SelectedIndex;
             for (int i = 0; i < EmployeeDatabase.Count; i++)
             {
-                if (EmployeeDatabase[i] == EmployeeListView.SelectedItem)
+                if (EmployeeDatabase[i] != null)
                 {
-                    Employee emp = (Employee)EmployeeDatabase[i];
-                    EmployeeDetailsWindow detailsWindow = new(emp); // 1. Kör konstruktorn
+                    Employee em = (Employee)EmployeeDatabase[i];
+                    string message = $"EMPLOYEE\nName: {em.Förnamn}\nLastname: {em.EfterNamn}\nBiography: {em.Bakgrund}\nSalary: {em.Salary} sek\nAge: {em.Age} years";
+                    EmployeeDetailsWindow detailsWindow = new EmployeeDetailsWindow(message); // 1. Kör konstruktorn
                     detailsWindow.Show(); // 2. visa fönstret 
                     Close(); // 3. stäng det gamla fönstret 
                     break;
                 }
             }
+
+
+
+
+
+
         }
+
     }
 }

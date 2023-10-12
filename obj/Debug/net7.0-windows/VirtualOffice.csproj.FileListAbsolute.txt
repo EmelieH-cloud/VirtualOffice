@@ -18,3 +18,5 @@ C:\Users\User\repos\Newton\VirtualOffice\obj\Debug\net7.0-windows\refint\Virtual
 C:\Users\User\repos\Newton\VirtualOffice\obj\Debug\net7.0-windows\VirtualOffice.pdb
 C:\Users\User\repos\Newton\VirtualOffice\obj\Debug\net7.0-windows\VirtualOffice.genruntimeconfig.cache
 C:\Users\User\repos\Newton\VirtualOffice\obj\Debug\net7.0-windows\ref\VirtualOffice.dll
+C:\Users\User\repos\Newton\VirtualOffice\obj\Debug\net7.0-windows\EmployeeDetailsWindow.g.cs
+C:\Users\User\repos\Newton\VirtualOffice\obj\Debug\net7.0-windows\EmployeeDetailsWindow.baml
